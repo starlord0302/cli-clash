@@ -1,0 +1,37 @@
+{
+  "warrior": {
+    "type": "warrior",
+    "HP": 100,
+    "ability": "armour",
+    "armour": 5,
+    "evasion": 20
+  },
+  "priest": {
+    "type": "priest",
+    "HP": 90,
+    "ability": "heal",
+    "armour": 4,
+    "evasion": 20
+  },
+  "mage": {
+    "type": "mage",
+    "HP": 70,
+    "ability": "firestorm",
+    "armour": 1,
+    "evasion": 5
+  },
+  "rouge": {
+    "type": "rouge",
+    "HP": 80,
+    "ability": "dodge",
+    "armour": 3,
+    "evasion": 30
+  },
+  "archer": {
+    "type": "archer",
+    "HP": 80,
+    "ability": "headshot",
+    "armour": 2,
+    "evasion": 15
+  }
+}
