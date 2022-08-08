@@ -16,7 +16,7 @@ export abstract class AbstractHero implements Hero{
 
   equipWeapon(weapon: Weapon) {
     this.weapon = weapon;
-    if (this.weapon.whoCouldUse != this.type || this.weapon.whoCouldUse != 'everybody') {
+    if (this.weapon.whoCouldUse != this.type && this.weapon.whoCouldUse != 'everybody') {
       this.weapon.minDamage = 0;
       this.weapon.maxDamage = 0;
     }
