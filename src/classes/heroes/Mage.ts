@@ -1,7 +1,7 @@
 import { AbstractHero } from '../../interfaces/AbstractHero';
 import heroData from '../../utility/hero-data.json';
 
-export class Mage extends AbstractHero implements Hero {
+export class Mage extends AbstractHero {
   type: string = heroData.mage.type;
   healthPoint: number = heroData.mage.HP
   ability: string = heroData.mage.ability;
