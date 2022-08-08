@@ -1,0 +1,44 @@
+{
+  "sword": {
+    "name": "sword",
+    "whoCouldUse": "everybody",
+    "minDamage": 8,
+    "maxDamage": 12,
+    "hitChance": 0.9
+  },
+  "dagger": {
+    "name": "dagger",
+    "whoCouldUse": "rouge",
+    "minDamage": 4,
+    "maxDamage": 5,
+    "hitChance": 0.98
+  },
+  "warHammer": {
+    "name": "war hammer",
+    "whoCouldUse": "priest",
+    "minDamage": 10,
+    "maxDamage": 15,
+    "hitChance": 0.93
+  },
+  "battleAxe": {
+    "name": "battle axe",
+    "whoCouldUse": "warrior",
+    "minDamage": 12,
+    "maxDamage": 15,
+    "hitChance": 0.92
+  },
+  "bow": {
+    "name": "bow",
+    "whoCouldUse": "archer",
+    "minDamage": 7,
+    "maxDamage": 12,
+    "hitChance": 0.89
+  },
+  "wand": {
+    "name": "wand",
+    "whoCouldUse": "mage",
+    "minDamage": 9,
+    "maxDamage": 15,
+    "hitChance": 0.97
+  }
+}
