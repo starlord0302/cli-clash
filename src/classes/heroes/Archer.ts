@@ -2,6 +2,7 @@ import { AbstractHero } from '../../interfaces/AbstractHero';
 import heroData from '../../utility/hero-data.json'
 
 export class Archer extends AbstractHero implements Hero {
+  type: string = heroData.archer.type;
   healthPoint: number = heroData.archer.HP;
   ability: string = heroData.archer.ability;
   armour: number = heroData.archer.armour;
