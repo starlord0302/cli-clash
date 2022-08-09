@@ -1,3 +1,4 @@
+import { Chance } from '../Chance';
 import { Dagger } from '../weapons/Dagger';
 import { Sword } from '../weapons/Sword';
 import { Warrior } from './Warrior';
@@ -45,5 +46,44 @@ describe('Hero methods', () => {
     opponent.equipWeapon(new Sword());
 
     expect(hero.attack(opponent, 0, 95, 20)).toBe(0);
+  });
+
+  it('should return a string with the attacker and defender status when a warrior attacks another warrior with a sword, and all the chances are right, the opponent could evade the attack', () => {
+    hero.equipWeapon(new Sword());
+    opponent.equipWeapon(new Sword());
+
+    const heroChance = new Chance(10, 10, 10, 4);
+    const opponentChance = new Chance(10, 10, 10, 4);
+
+    const battleResult = hero.battle(opponent, heroChance, opponentChance);
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 0}\nDEFENDER: {name: John, type: warrior, ability: armour in use, HP after the attack: 100}';
+
+    expect(battleResult).toBe(expectedResult);
+  });
+
+  it('should return a string with the attacker and defender status when a warrior attacks another warrior with a sword, and all the chances are right except the opponent\'s evasion', () => {
+    hero.equipWeapon(new Sword());
+    opponent.equipWeapon(new Sword());
+
+    const heroChance = new Chance(10, 10, 10, 4);
+    const opponentChance = new Chance(10, 25, 10, 4);
+
+    const battleResult = hero.battle(opponent, heroChance, opponentChance);
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 7}\nDEFENDER: {name: John, type: warrior, ability: armour in use, HP after the attack: 93}';
+
+    expect(battleResult).toBe(expectedResult);
+  });
+
+  it('should return a string with the attacker and defender status when a warrior attacks another warrior with a sword, and all the chances are right except the opponent\'s evasion, and ability', () => {
+    hero.equipWeapon(new Sword());
+    opponent.equipWeapon(new Sword());
+
+    const heroChance = new Chance(10, 10, 10, 4);
+    const opponentChance = new Chance(15, 25, 10, 4);
+
+    const battleResult = hero.battle(opponent, heroChance, opponentChance);
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 11}\nDEFENDER: {name: John, type: warrior, ability: armour not in use, HP after the attack: 89}';
+
+    expect(battleResult).toBe(expectedResult);
   });
 });
