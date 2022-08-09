@@ -1,6 +1,6 @@
-import { AbstractHero } from "../interfaces/AbstractHero";
-import { generateRandomToMax } from "../utility/random-generator";
-import { Chance } from "./Chance";
+import { AbstractHero } from '../interfaces/AbstractHero';
+import { generateRandomToMax } from '../utility/random-generator';
+import { Chance } from './Chance';
 
 export class Arena {
   static tournament(hero1: AbstractHero, hero2: AbstractHero) {

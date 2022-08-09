@@ -1,4 +1,4 @@
-import { generateRandomTo100 } from "../utility/random-generator";
+import { generateRandomTo100 } from '../utility/random-generator';
 
 export class Chance {
   abilityChance?: number;

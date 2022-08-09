@@ -1,4 +1,4 @@
-import { Weapon } from "./Weapon";
+import { Weapon } from './Weapon';
 
 export abstract class AbstractWeapon implements Weapon {
   abstract name: string;

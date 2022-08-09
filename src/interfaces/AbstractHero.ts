@@ -1,7 +1,7 @@
-import { AbstractWeapon } from "./AbstractWeapon";
-import { Hero } from "./Hero";
+import { AbstractWeapon } from './AbstractWeapon';
+import { Hero } from './Hero';
 import { Chance } from '../classes/Chance';
-import { boostMethod, declineMethod } from "../classes/abilities";
+import { boostMethod, declineMethod } from '../classes/abilities';
 
 export abstract class AbstractHero implements Hero {
   abstract type: string;

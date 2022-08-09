@@ -1,13 +1,13 @@
-import { Boost, Decline } from "./abilities";
-import { Archer } from "./heroes/Archer";
-import { Mage } from "./heroes/Mage";
-import { Priest } from "./heroes/Priest";
-import { Rouge } from "./heroes/Rouge";
-import { Warrior } from "./heroes/Warrior";
-import { Bow } from "./weapons/Bow";
-import { Dagger } from "./weapons/Dagger";
-import { Sword } from "./weapons/Sword";
-import { Wand } from "./weapons/Wand";
+import { Boost, Decline } from './abilities';
+import { Archer } from './heroes/Archer';
+import { Mage } from './heroes/Mage';
+import { Priest } from './heroes/Priest';
+import { Rouge } from './heroes/Rouge';
+import { Warrior } from './heroes/Warrior';
+import { Bow } from './weapons/Bow';
+import { Dagger } from './weapons/Dagger';
+import { Sword } from './weapons/Sword';
+import { Wand } from './weapons/Wand';
 
 describe('Abilities', () => {
   let archer: Archer;
