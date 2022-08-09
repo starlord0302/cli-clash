@@ -4,6 +4,8 @@ import { Mage } from "./heroes/Mage";
 import { Priest } from "./heroes/Priest";
 import { Rouge } from "./heroes/Rouge";
 import { Warrior } from "./heroes/Warrior";
+import { Bow } from "./weapons/Bow";
+import { Dagger } from "./weapons/Dagger";
 import { Sword } from "./weapons/Sword";
 import { Wand } from "./weapons/Wand";
 
@@ -83,4 +85,50 @@ describe('Abilities', () => {
     expect(mage.weapon!.minDamage).toBe(9);
     expect(mage.weapon!.maxDamage).toBe(15);
   });
+
+  it('should return 7 and 12 when the Boost.firestorm() was called on an archer, it checks the bow\'s damage', () => {
+    archer.equipWeapon(new Bow());
+    Boost.firestorm(archer);
+    expect(archer.weapon!.minDamage).toBe(7);
+    expect(archer.weapon!.maxDamage).toBe(12);
+  });
+
+  it('should return 22 and 27 when the Boost.headshot() was called on an archer, it checks the bow\'s damage', () => {
+    archer.equipWeapon(new Bow());
+    Boost.headshot(archer);
+    expect(archer.weapon!.minDamage).toBe(22);
+    expect(archer.weapon!.maxDamage).toBe(27);
+  });
+
+  it('should return 23 and 27 when the Boost.headshot() was called on an archer, it checks the bow\'s damage', () => {
+    archer.equipWeapon(new Sword());
+    Boost.headshot(archer);
+    expect(archer.weapon!.minDamage).toBe(23);
+    expect(archer.weapon!.maxDamage).toBe(27);
+  });
+
+  it('should return 7 and 12 when the Decline.headshot() was called on an archer, it checks the bow\'s  damage', () => {
+    archer.equipWeapon(new Bow());
+    Boost.headshot(archer);
+    Decline.headshot(archer);
+    expect(archer.weapon!.minDamage).toBe(7);
+    expect(archer.weapon!.maxDamage).toBe(12);
+  });
+
+  it('should return 4 and 5 when the Boost.headshot() was called on a rouge, it checks the dagger\'s damage', () => {
+    rouge.equipWeapon(new Dagger());
+    Boost.headshot(rouge);
+    expect(rouge.weapon!.minDamage).toBe(4);
+    expect(rouge.weapon!.maxDamage).toBe(5);
+  });
+
+  it('should return 100 when the Boost.heal() was called on a priest, it checks the priest\'s HP', () => {
+    Boost.heal(priest);
+    expect(priest.healthPoint).toBe(100);
+  })
+
+  it('should return 70 when the Boost.heal() was called on a mage, it checks the mage\'s HP', () => {
+    Boost.heal(mage);
+    expect(mage.healthPoint).toBe(70);
+  })
 });

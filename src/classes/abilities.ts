@@ -21,6 +21,19 @@ export class Boost {
       hero.weapon!.maxDamage += abilityData.firestorm.amount;
     }
   }
+
+  static headshot(hero: Hero): void {
+    if (hero.ability === abilityData.headshot.abilityName) {
+      hero.weapon!.minDamage += abilityData.headshot.amount;
+      hero.weapon!.maxDamage += abilityData.headshot.amount;
+    }
+  }
+
+  static heal(hero: Hero): void {
+    if (hero.ability === abilityData.heal.abilityName) {
+      hero.healthPoint += 10;
+    }
+  }
 }
 
 export class Decline {
@@ -48,11 +61,25 @@ export class Decline {
       hero.weapon!.maxDamage -= abilityData.firestorm.amount;
     }
   }
+
+  static headshot(hero: Hero): void {
+    if (hero.ability === abilityData.headshot.abilityName) {
+      hero.weapon!.minDamage -= abilityData.headshot.amount;
+      hero.weapon!.maxDamage -= abilityData.headshot.amount;
+    }
+  }
 }
 
 const methods: { [methodName: string]: Function } = {
     'add-armour': Boost.armour,
-    'remove-armour': Decline.armour
+    'remove-armour': Decline.armour,
+    'add-dodge': Boost.dodge,
+    'remove-dodge': Decline.dodge,
+    'add-firestorm': Boost.firestorm,
+    'remove-firestorm': Decline.firestorm,
+    'add-headshot': Boost.headshot,
+    'remove-headshot': Decline.headshot,
+    'add-heal': Boost.heal
 };
 
 export function boostMethod(hero: Hero) {
