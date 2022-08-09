@@ -3,6 +3,9 @@ import { Hero } from './Hero';
 import { Chance } from '../classes/Chance';
 import { boostMethod, declineMethod } from '../classes/abilities';
 
+interface BattleResult {
+  [battle: string]: string
+}
 export abstract class AbstractHero implements Hero {
   abstract type: string;
   abstract healthPoint: number;
@@ -35,16 +38,13 @@ export abstract class AbstractHero implements Hero {
   ): number {
     if (
       chanceToHit <= this.weapon!.hitChance * 100 &&
-      this.weapon!.maxDamage > 0
+      this.weapon!.maxDamage > 0 &&
+      evadeChance >= opponent.evasion
     ) {
-      if (evadeChance >= opponent.evasion) {
-        return (
-          this.weapon!.getDamage(intialDamageAdder) -
-          Math.floor(opponent.armour / 3)
-        );
-      } else {
-        return 0;
-      }
+      return (
+        this.weapon!.getDamage(intialDamageAdder) -
+        Math.floor(opponent.armour / 3)
+      );
     } else {
       return 0;
     }
@@ -64,17 +64,17 @@ export abstract class AbstractHero implements Hero {
     if (chanceOfPlayer.abilityChance! <= 10) {
       boostOfPlayer = true;
       boostMethod(this);
-      playerStatus += 'in use, ';
+      playerStatus += 'in use';
     } else {
-      playerStatus += 'not in use, ';
+      playerStatus += 'not in use';
     }
 
     if (chanceOfOpponent.abilityChance! <= 10) {
       boostOfOpponent = true;
       boostMethod(opponent);
-      opponentStatus += 'in use, ';
+      opponentStatus += 'in use';
     } else {
-      opponentStatus += 'not in use, ';
+      opponentStatus += 'not in use';
     }
 
     const finalDamageOfPlayer = this.attack(
@@ -84,11 +84,22 @@ export abstract class AbstractHero implements Hero {
       chanceOfOpponent.evasionChance!
     );
 
-    playerStatus += `damage made: ${finalDamageOfPlayer}}`;
-
-    opponent.healthPoint -= finalDamageOfPlayer;
-
-    opponentStatus += `HP after the attack: ${opponent.healthPoint}}`;
+    if (finalDamageOfPlayer !== 0) {
+      playerStatus += `, damage made: ${finalDamageOfPlayer}}`;
+      opponent.healthPoint -= finalDamageOfPlayer;
+      opponentStatus += `, HP after the attack: ${opponent.healthPoint}}`;
+    } else {
+      if (chanceOfPlayer.hitChance! >= this.weapon!.hitChance * 100) {
+        playerStatus += `, hit missed by weapon}`;
+        opponentStatus += `}`;
+      } else if (chanceOfOpponent.evasionChance! <= opponent.evasion) {
+        playerStatus += `, could not make a hit}`;
+        opponentStatus += `, evaded the hit}`;
+      } else {
+        playerStatus += `, unable to use weapon}`;
+        opponentStatus += `}`;
+      }
+    }
 
     if (boostOfPlayer) {
       declineMethod(this);
@@ -108,7 +119,7 @@ export abstract class AbstractHero implements Hero {
     chanceOfPlayer: Chance,
     chanceOfOpponent: Chance,
     whoStarts: number
-  ): void {
+  ): BattleResult {
     let firstBattle = '';
     let secondBattle = '';
     if (whoStarts == 0) {
@@ -119,7 +130,9 @@ export abstract class AbstractHero implements Hero {
       secondBattle += this.battle(opponent, chanceOfPlayer, chanceOfOpponent);
     }
 
-    console.log(firstBattle);
-    console.log(secondBattle);
+    return {
+      firstBattle,
+      secondBattle
+    }
   }
 }
