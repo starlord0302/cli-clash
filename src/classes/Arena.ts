@@ -9,6 +9,8 @@ export class Arena {
     const hero1Chance: Chance = new Chance();
     const hero2Chance: Chance = new Chance();
 
+    let round: number = 0;
+
     while (hero1.healthPoint >= 0 && hero2.healthPoint >= 0) {
 
       hero1Chance.randomizeChances();
@@ -17,9 +19,15 @@ export class Arena {
       hero1Chance.damageToAdd = generateRandomToMax(hero1.weapon!.maxDamage - hero1.weapon!.minDamage);
       hero2Chance.damageToAdd = generateRandomToMax(hero2.weapon!.maxDamage - hero2.weapon!.minDamage);
 
-      let whoStarts: number = generateRandomToMax(1);
+      const whoStarts: number = generateRandomToMax(1);
 
-      hero1.battleRound(hero2, hero1Chance, hero2Chance, whoStarts);
+      const battleResult = hero1.battleRound(hero2, hero1Chance, hero2Chance, whoStarts);
+
+      console.log(`----------ROUND ${round + 1}----------`);
+      console.log(battleResult.firstBattle);
+      console.log(battleResult.secondBattle);
+
+      round++;
     }
 
     if (hero1.healthPoint <= 0) {
