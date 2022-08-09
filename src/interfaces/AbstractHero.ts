@@ -55,8 +55,8 @@ export abstract class AbstractHero implements Hero {
     chanceOfPlayer: Chance,
     chanceOfOpponent: Chance
   ): string {
-    let playerStatus = `ATTACKER: {name: ${this.name}, type: ${this.type}, ability: ${this.ability} `;
-    let opponentStatus = `DEFENDER: {name: ${opponent.name}, type: ${opponent.type}, ability: ${opponent.ability} `;
+    let playerStatus = `ATTACKER: {name: ${this.name}, type: ${this.type}, HP: ${this.healthPoint}, ability: ${this.ability} `;
+    let opponentStatus = `DEFENDER: {name: ${opponent.name}, type: ${opponent.type}, HP: ${opponent.healthPoint}, ability: ${opponent.ability} `;
 
     let boostOfPlayer = false;
     let boostOfOpponent = false;
@@ -85,7 +85,7 @@ export abstract class AbstractHero implements Hero {
     );
 
     if (finalDamageOfPlayer !== 0) {
-      playerStatus += `, damage made: ${finalDamageOfPlayer}}`;
+      playerStatus += `, final damage made: ${finalDamageOfPlayer} (damage without the opponent's armour decrease: ${finalDamageOfPlayer + Math.floor(opponent.armour / 3)})}`;
       opponent.healthPoint -= finalDamageOfPlayer;
       opponentStatus += `, HP after the attack: ${opponent.healthPoint}}`;
     } else {

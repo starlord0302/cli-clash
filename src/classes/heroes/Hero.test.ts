@@ -56,7 +56,7 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(10, 10, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, could not make a hit}\nDEFENDER: {name: John, type: warrior, ability: armour in use, evaded the hit}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, HP: 100, ability: armour in use, could not make a hit}\nDEFENDER: {name: John, type: warrior, HP: 100, ability: armour in use, evaded the hit}';
 
     expect(battleResult).toBe(expectedResult);
   });
@@ -69,7 +69,7 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(10, 25, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, hit missed by weapon}\nDEFENDER: {name: John, type: warrior, ability: armour in use}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, HP: 100, ability: armour in use, hit missed by weapon}\nDEFENDER: {name: John, type: warrior, HP: 100, ability: armour in use}';
 
     expect(battleResult).toBe(expectedResult);
   });
@@ -82,7 +82,7 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(10, 25, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, unable to use weapon}\nDEFENDER: {name: John, type: warrior, ability: armour in use}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, HP: 100, ability: armour in use, unable to use weapon}\nDEFENDER: {name: John, type: warrior, HP: 100, ability: armour in use}';
 
     expect(battleResult).toBe(expectedResult);
   });
@@ -95,7 +95,7 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(10, 25, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 7}\nDEFENDER: {name: John, type: warrior, ability: armour in use, HP after the attack: 93}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, HP: 100, ability: armour in use, final damage made: 7 (damage without the opponent\'s armour decrease: 12)}\nDEFENDER: {name: John, type: warrior, HP: 100, ability: armour in use, HP after the attack: 93}';
 
     expect(battleResult).toBe(expectedResult);
   });
@@ -108,7 +108,7 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(15, 25, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 11}\nDEFENDER: {name: John, type: warrior, ability: armour not in use, HP after the attack: 89}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, HP: 100, ability: armour in use, final damage made: 11 (damage without the opponent\'s armour decrease: 12)}\nDEFENDER: {name: John, type: warrior, HP: 100, ability: armour not in use, HP after the attack: 89}';
 
     expect(battleResult).toBe(expectedResult);
   });
