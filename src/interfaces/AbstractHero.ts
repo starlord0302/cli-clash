@@ -61,7 +61,7 @@ export abstract class AbstractHero implements Hero {
     let boostOfPlayer = false;
     let boostOfOpponent = false;
 
-    if (chanceOfPlayer.abilityChance <= 10) {
+    if (chanceOfPlayer.abilityChance! <= 10) {
       boostOfPlayer = true;
       boostMethod(this);
       playerStatus += 'in use, ';
@@ -69,7 +69,7 @@ export abstract class AbstractHero implements Hero {
       playerStatus += 'not in use, ';
     }
 
-    if (chanceOfOpponent.abilityChance <= 10) {
+    if (chanceOfOpponent.abilityChance! <= 10) {
       boostOfOpponent = true;
       boostMethod(opponent);
       opponentStatus += 'in use, ';
@@ -79,9 +79,9 @@ export abstract class AbstractHero implements Hero {
 
     const finalDamageOfPlayer = this.attack(
       opponent,
-      chanceOfPlayer.damageToAdd,
-      chanceOfPlayer.hitChance,
-      chanceOfOpponent.evasionChance
+      chanceOfPlayer.damageToAdd!,
+      chanceOfPlayer.hitChance!,
+      chanceOfOpponent.evasionChance!
     );
 
     playerStatus += `damage made: ${finalDamageOfPlayer}}`;
@@ -118,5 +118,8 @@ export abstract class AbstractHero implements Hero {
       firstBattle += opponent.battle(this, chanceOfOpponent, chanceOfPlayer);
       secondBattle += this.battle(opponent, chanceOfPlayer, chanceOfOpponent);
     }
+
+    console.log(firstBattle);
+    console.log(secondBattle);
   }
 }
