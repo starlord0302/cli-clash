@@ -56,7 +56,33 @@ describe('Hero methods', () => {
     const opponentChance = new Chance(10, 10, 10, 4);
 
     const battleResult = hero.battle(opponent, heroChance, opponentChance);
-    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, damage made: 0}\nDEFENDER: {name: John, type: warrior, ability: armour in use, HP after the attack: 100}';
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, could not make a hit}\nDEFENDER: {name: John, type: warrior, ability: armour in use, evaded the hit}';
+
+    expect(battleResult).toBe(expectedResult);
+  });
+
+  it('should return a string with the attacker and defender status when a warrior attacks another warrior with a sword, but the attacker missed the hit with the weapon', () => {
+    hero.equipWeapon(new Sword());
+    opponent.equipWeapon(new Sword());
+
+    const heroChance = new Chance(10, 10, 91, 4);
+    const opponentChance = new Chance(10, 25, 10, 4);
+
+    const battleResult = hero.battle(opponent, heroChance, opponentChance);
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, hit missed by weapon}\nDEFENDER: {name: John, type: warrior, ability: armour in use}';
+
+    expect(battleResult).toBe(expectedResult);
+  });
+
+  it('should return a string with the attacker and defender status when a warrior attacks another warrior with a dagger, the attacker unable to use weapon', () => {
+    hero.equipWeapon(new Dagger());
+    opponent.equipWeapon(new Sword());
+
+    const heroChance = new Chance(10, 10, 10, 4);
+    const opponentChance = new Chance(10, 25, 10, 4);
+
+    const battleResult = hero.battle(opponent, heroChance, opponentChance);
+    const expectedResult = 'ATTACKER: {name: Erik, type: warrior, ability: armour in use, unable to use weapon}\nDEFENDER: {name: John, type: warrior, ability: armour in use}';
 
     expect(battleResult).toBe(expectedResult);
   });
