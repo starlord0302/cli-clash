@@ -68,6 +68,8 @@ export class Decline {
       hero.weapon!.maxDamage -= abilityData.headshot.amount;
     }
   }
+
+  static heal(hero: Hero): void {}
 }
 
 const methods: { [methodName: string]: Function } = {
@@ -79,7 +81,8 @@ const methods: { [methodName: string]: Function } = {
     'remove-firestorm': Decline.firestorm,
     'add-headshot': Boost.headshot,
     'remove-headshot': Decline.headshot,
-    'add-heal': Boost.heal
+    'add-heal': Boost.heal,
+    'remove-heal': Decline.heal
 };
 
 export function boostMethod(hero: Hero) {
