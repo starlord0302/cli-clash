@@ -1,8 +1,9 @@
 import { AbstractWeapon } from "./AbstractWeapon";
 import { Hero } from "./Hero";
-import { Weapon } from "./Weapon";
+import { Chance } from '../classes/Chance';
+import { boostMethod, declineMethod } from "../classes/abilities";
 
-export abstract class AbstractHero implements Hero{
+export abstract class AbstractHero implements Hero {
   abstract type: string;
   abstract healthPoint: number;
   abstract ability: string;
@@ -33,5 +34,58 @@ export abstract class AbstractHero implements Hero{
     } else {
       return 0;
     }
+  }
+
+  battleRound(opponent: Hero, chanceOfPlayer: Chance, chanceOfOpponent: Chance, whoStarts: number): string {
+
+    let playerStatus = '';
+    let opponentStatus = '';
+
+    let boostOfPlayer = false;
+    let boostOfOpponent = false;
+
+    if (chanceOfPlayer.abilityChance <= 10) {
+      boostOfPlayer = true;
+      boostMethod(this);
+      playerStatus += `${this.type} is using the ${this.ability} ability`;
+    }
+
+    if (chanceOfOpponent.abilityChance <= 10) {
+      boostOfOpponent = true;
+      boostMethod(opponent);
+      opponentStatus += `${opponent.type} is using the ${this.ability} ability`;
+    }
+
+    if (whoStarts === 0) {
+      const finalDamageOfPlayer = this.attack(opponent, chanceOfPlayer.damageToAdd, chanceOfPlayer.hitChance, chanceOfPlayer.evasionChance);
+      opponent.healthPoint -= finalDamageOfPlayer;
+
+      playerStatus += `, took an attack with a ${finalDamageOfPlayer} damage, opponent HP is ${opponent.healthPoint}`;
+
+      const finalDamageOfOpponent = opponent.attack(this, chanceOfOpponent.damageToAdd, chanceOfOpponent.hitChance, chanceOfOpponent.evasionChance);
+      this.healthPoint -= finalDamageOfOpponent;
+
+      opponentStatus += `, took an attack with a ${finalDamageOfOpponent} damage, player HP is ${this.healthPoint}`;
+    } else {
+      const finalDamageOfOpponent = opponent.attack(this, chanceOfOpponent.damageToAdd, chanceOfOpponent.hitChance, chanceOfOpponent.evasionChance);
+      this.healthPoint -= finalDamageOfOpponent;
+
+      opponentStatus += `, took an attack with a ${finalDamageOfOpponent} damage, player HP is ${this.healthPoint}.`;
+
+      const finalDamageOfPlayer = this.attack(opponent, chanceOfPlayer.damageToAdd, chanceOfPlayer.hitChance, chanceOfPlayer.evasionChance);
+      opponent.healthPoint -= finalDamageOfPlayer;
+
+      playerStatus += `, took an attack with a ${finalDamageOfPlayer} damage, opponent HP is ${opponent.healthPoint}.`;
+    }
+
+    if (boostOfPlayer) {
+      declineMethod(this);
+    }
+
+    if (boostOfOpponent) {
+      declineMethod(opponent);
+    }
+
+    return `${playerStatus}\n${opponentStatus}`;
   }
 }

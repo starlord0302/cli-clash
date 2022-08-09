@@ -7,4 +7,6 @@ export interface Hero {
   armour: number;
   evasion: number;
   weapon: Weapon | undefined;
+
+  attack(opponent: Hero, intialDamageAdder: number, chanceToHit: number, evadeChance: number): number;
 }
