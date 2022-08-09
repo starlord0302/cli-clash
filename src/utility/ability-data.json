@@ -1,0 +1,27 @@
+{
+  "armour": {
+    "abilityName": "armour",
+    "effects": "armour",
+    "amount": 10
+  },
+  "dodge": {
+    "abilityName": "dodge",
+    "effects": "evasion",
+    "amount": 100
+  },
+  "firestorm": {
+    "abilityName": "firestorm",
+    "effects": "damage",
+    "amount": 20
+  },
+  "headshot": {
+    "abilityName": "headshot",
+    "effects": "damage",
+    "amount": 15
+  },
+  "heal": {
+    "abilityName": "heal",
+    "effects": "healthPoint",
+    "amount": 10
+  }
+}
